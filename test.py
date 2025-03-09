@@ -1,32 +1,32 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+from sklearn import linear_model
+from sklearn.model_selection import train_test_split
 
-x = np.random.rand(10)  # Random x values
-y = np.random.rand(10)  # Random y values
-colors = np.random.rand(10)  # Random colors
+data = pd.read_csv("student-mat.csv", sep=";")
 
-plt.scatter(x, y, c=colors, cmap='viridis')  # Create a colored scatter plot
-plt.colorbar()  # Add a color legend
-plt.xlabel("X-axis")
-plt.ylabel("Y-axis")
-plt.title("Colored Scatter Plot")
-plt.show()
+data = data[["G1", "G2", "G3", "studytime", "failures", "absences"]]
 
-names= np.array(["Nareen","thiran"])
-print("first name: ", names[0])
-print("last name: ",names[-1])
+predict = "G3"
 
-numbers= np.array([[1,2,3],[4,5,6],[7,8,9]])
-print("Second row third element: ", numbers[1][2])
+x = np.array(data.drop([predict], axis=1))
+y = np.array(data[predict])
 
-newnumber=np.arange(1,26).reshape(5,5)
-print("numbers are: \n", newnumber,"\n")
+#splitting data into training and testing data
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1)
 
-renumber=np.arange(1,11).reshape(2,-1)
-print(renumber)
+#create and train the model
+linear = linear_model.LinearRegression()
+linear.fit(x_train, y_train)
 
-sample_dict={"x":1,"y":2,"z":3}
-print(sample_dict)
-the_series=pd.Series(sample_dict)
-print(the_series)
+#testing or evaluate the model
+acc = linear.score(x_test, y_test) #models accuracy score
+print(acc)
+print("Coefficient: \n", linear.coef_)
+print("Intercept: \n", linear.intercept_)
+
+predictions= linear.predict(x_test)
+
+for x in range(len(predictions)):
+    print("Mark prediction: ",predictions[x],"\n", x_test[x], "\n","Actual mark: ",y_test[x])
+    
