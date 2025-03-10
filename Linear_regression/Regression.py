@@ -6,7 +6,7 @@ import matplotlib.pyplot as pyplot
 import pickle
 from matplotlib import style
 
-data = pd.read_csv("student-mat.csv", sep=";")
+data = pd.read_csv("Linear_regression/student-mat.csv", sep=";")
 
 data = data[["G1", "G2", "G3", "studytime", "failures", "absences"]]
 
@@ -34,7 +34,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1)
 #         with open("studentmodel.pickle", "wb") as f:
 #             pickle.dump(linear, f)
     
-pickle_in = open("studentmodel.pickle", "rb")
+pickle_in = open("Linear_regression/studentmodel.pickle", "rb")
 linear = pickle.load(pickle_in)
 acc = linear.score(x_test, y_test) #models accuracy score
 print("Accuracy: ", acc)
