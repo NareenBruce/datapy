@@ -46,12 +46,9 @@ predictions= linear.predict(x_test)
 for x in range(len(predictions)):
     print("Mark prediction: ",predictions[x],"\n", x_test[x], "\n","Actual mark: ",y_test[x])
 
-print(len(data["studytime"]))
-print(";;;;")
-print(len(predictions[x]))
 #setting and styling the graph
 style.use("ggplot")
-p="studytime"
+p="failures"
 pyplot.scatter(data[p], data["G3"])
 pyplot.xlabel(p)
 pyplot.ylabel("Final Grade")
