@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as pyplot
+import matplotlib.pyplot as plt
 import pickle
 from matplotlib import style
 
@@ -46,10 +46,10 @@ predictions= linear.predict(x_test)
 for x in range(len(predictions)):
     print("Mark prediction: ",predictions[x],"\n", x_test[x], "\n","Actual mark: ",y_test[x])
 
-#setting and styling the graph
-style.use("ggplot")
-p="studytime"
-pyplot.scatter(data[p], data["G3"])
-pyplot.xlabel(p)
-pyplot.ylabel("Final Grade")
-pyplot.show()
+plt.scatter(y_test, predictions, color='blue', edgecolors='k')
+plt.xlabel("Actual Final Grade (G3)")
+plt.ylabel("Predicted Final Grade")
+plt.title("Predicted vs Actual Final Grades")
+plt.grid(True)
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color='red', linestyle='--')  # Ideal line
+plt.show()
