@@ -48,7 +48,7 @@ for x in range(len(predictions)):
 
 #setting and styling the graph
 style.use("ggplot")
-p="failures"
+p="studytime"
 pyplot.scatter(data[p], data["G3"])
 pyplot.xlabel(p)
 pyplot.ylabel("Final Grade")
